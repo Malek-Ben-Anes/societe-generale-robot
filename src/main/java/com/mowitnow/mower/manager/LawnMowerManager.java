@@ -5,11 +5,16 @@ import com.mowitnow.mower.model.LawnMower;
 import com.mowitnow.mower.model.LawnMowerInstructionList;
 import com.mowitnow.mower.model.enums.OrientationEnum;
 import com.mowitnow.mower.provider.MowerInputData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LawnMowerManager {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LawnMowerManager.class);
+
     // Represents the lawn where lawn mowers move
     private final Lawn lawn;
     // Map to store lawn mowers with their respective instructions
@@ -33,13 +38,14 @@ public class LawnMowerManager {
 
     // Method to run all lawn mowers and print their final positions
     public void runAllMowers() {
+        LOGGER.info("\n\n----------- Running All Lawn mowers -----------");
         for (Map.Entry<LawnMower, LawnMowerInstructionList> entry : lawnMowersInstructionsMap.entrySet()) {
             LawnMower lawnMower = entry.getKey();
             LawnMowerInstructionList instructions = entry.getValue();
             // Move the lawn mower according to its instructions
             lawnMower.move(lawn, instructions);
             // Print the final position of the lawn mower
-            System.out.println(lawnMower.getPosition());
+            LOGGER.info(lawnMower.getPosition());
         }
     }
 

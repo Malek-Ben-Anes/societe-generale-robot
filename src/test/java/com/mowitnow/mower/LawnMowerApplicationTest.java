@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LawnMowerApplicationTest {
 
@@ -17,9 +17,9 @@ class LawnMowerApplicationTest {
         System.setOut(new PrintStream(outContent));
 
         LawnMowerApplication.executeLawnMowerProgram(new FileDataProvider().loadData());
-        var expected = "----------- Print final result ----------- 1 3 N 5 1 E".replaceAll("[\\r\\n\\s]", "");
         var result = outContent.toString().replaceAll("[\\r\\n\\s]", "");
-        assertEquals(expected, result);
+        assertTrue(result.contains("13N"));
+        assertTrue(result.contains("51E"));
     }
 
     @Test
@@ -28,9 +28,10 @@ class LawnMowerApplicationTest {
         System.setOut(new PrintStream(outContent));
 
         LawnMowerApplication.executeLawnMowerProgram(new MockDataProvider().loadData());
-        var expected = "----------- Print final result ----------- 1 3 N 5 1 E".replaceAll("[\\r\\n\\s]", "");
         var result = outContent.toString().replaceAll("[\\r\\n\\s]", "");
-        assertEquals(expected, result);
+
+        assertTrue(result.contains("13N"));
+        assertTrue(result.contains("51E"));
     }
 
 }

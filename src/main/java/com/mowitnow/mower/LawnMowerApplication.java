@@ -7,10 +7,14 @@ package com.mowitnow.mower;
 import com.mowitnow.mower.manager.LawnMowerManager;
 import com.mowitnow.mower.model.Lawn;
 import com.mowitnow.mower.provider.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
 public class LawnMowerApplication {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LawnMowerApplication.class);
 
     /**
      * The main method of the application. It starts the application, selects the data provider,
@@ -46,8 +50,8 @@ public class LawnMowerApplication {
             switch (choice) {
                 case 1 -> dataProvider = new FileDataProvider(); // Read data from input.txt file
                 case 2 -> dataProvider = new MockDataProvider(); // Use static data from java code
-                case 0 -> System.out.println("Exiting the program."); // Exit program
-                default -> System.out.println("Invalid choice. Please try again."); // Invalid choice
+                case 0 -> LOGGER.info("Exiting the program."); // Exit program
+                default -> LOGGER.warn("Invalid choice. Please try again."); // Invalid choice
             }
         } while (choice != 0 && choice != 1 && choice != 2); // Repeat until valid choice is made
 
@@ -58,11 +62,14 @@ public class LawnMowerApplication {
      * Prints the menu for selecting the data provider.
      */
     private static void printMenu() {
-        System.out.println("----------- Menu -----------");
-        System.out.println("1. Read Inputs from input.txt file");
-        System.out.println("2. Retrieve data from static java code");
-        System.out.println("0. Exit");
-        System.out.print("Enter your choice: ");
+        var menuMessage = """
+                ------------ Menu ------------
+                1. Read Inputs from input.txt file
+                2. Retrieve data from static Mock Data
+                0. Exit
+                Enter your choice:
+                """;
+        LOGGER.info(menuMessage);
     }
 
     /**
@@ -78,7 +85,6 @@ public class LawnMowerApplication {
             manager.createLawnMowerInstruction(mower);
         }
 
-        System.out.println("----------- Print final result -----------");
         manager.runAllMowers();
     }
 }

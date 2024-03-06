@@ -1,12 +1,17 @@
 package com.mowitnow.mower.provider;
 
 import com.mowitnow.mower.LawnMowerApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class FileDataProvider implements DataProvider {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileDataProvider.class);
 
     // File name for input data
     public static final String INPUT_FILE_NAME = "/input.txt";
@@ -17,7 +22,7 @@ public class FileDataProvider implements DataProvider {
      * @return InputData object containing lawn dimensions and mower inputs
      */
     public InputData loadData() {
-        System.out.println("----------- Retrieve Data from 'input.txt' File -----------");
+        LOGGER.info("----------- Retrieve Data from 'input.txt' File -----------");
 
         try (InputStream inputStream = LawnMowerApplication.class.getResourceAsStream(INPUT_FILE_NAME);
              BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
