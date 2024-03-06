@@ -53,7 +53,7 @@ To use the Lawn Mower Program, follow these steps:
 5. Run the program:
 
     ```bash
-    java -jar com.mowitnow.mower-1.0-SNAPSHOT.jar
+    java -jar  com.mowitnow.mower-1.0.jar
     ```
 
 ## Docker
@@ -64,14 +64,14 @@ To facilitate deployment and ensure consistency across different environments, t
 To build the Docker image for this project, make sure you have Docker installed on your machine. Then, open a terminal or command prompt and navigate to the root directory of the project. Use the following command to build the Docker image:
 
     ```bash
-    docker build -t com.mowitnow.mower-1.0-SNAPSHOT.jar .
+    docker build -t  com.mowitnow.mower-1.0.jar .
     ```
 
 #### Running the Docker Image
 After building the Docker image, you can run the application inside a Docker container. To run the image in interactive mode and provide input to the command, use the following command:
 
     ```bash
-    docker run -it -p 8080:8080 com.mowitnow.mower-1.0-SNAPSHOT.jar
+    docker run -it -p 8080:8080 com.mowitnow.mower-1.0.jar 
     ```
 
 This command allocates a pseudo-TTY and allows you to interact with the application as if it were running on your local machine. If the application expects input from the command line, you can provide it directly from your terminal.
