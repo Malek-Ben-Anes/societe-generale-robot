@@ -11,7 +11,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("AD"); // Forward, Turn Right
+        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
         mower.move(lawn, instructions);
@@ -25,7 +25,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.EAST);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("AD"); // Forward, Turn Right
+        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
         mower.move(lawn, instructions);
@@ -39,7 +39,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.SOUTH);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("AD"); // Forward, Turn Right
+        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
         mower.move(lawn, instructions);
@@ -53,7 +53,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.WEST);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("AD"); // Forward, Turn Right
+        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
         mower.move(lawn, instructions);
@@ -67,7 +67,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("D"); // Turn Right
+        LawnMowerInstructions instructions = new LawnMowerInstructions("D"); // Turn Right
 
         // Act
         mower.move(lawn, instructions);
@@ -81,7 +81,7 @@ class LawnMowerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
-        LawnMowerInstructionList instructions = new LawnMowerInstructionList("G"); // Turn Left
+        LawnMowerInstructions instructions = new LawnMowerInstructions("G"); // Turn Left
 
         // Act
         mower.move(lawn, instructions);
@@ -111,18 +111,18 @@ class LawnMowerTest {
         assertEquals("1 2 N", mower.getPosition());
 
         mower = new LawnMower(1, 2, OrientationEnum.NORTH);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructionList(""));
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions(""));
         assertEquals("1 2 N", mower.getPosition());
     }
 
     @Test
     void testMove() {
         LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructionList("GAGAGAGAA"));
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions("GAGAGAGAA"));
         assertEquals("1 3 N", mower.getPosition());
 
         mower = new LawnMower(3, 3, OrientationEnum.EAST);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructionList("AADAADADDA"));
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions("AADAADADDA"));
         assertEquals("5 1 E", mower.getPosition());
     }
 

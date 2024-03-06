@@ -33,13 +33,13 @@ public class LawnMower {
     /**
      * Move the lawn mower according to the instructions provided
      */
-    public void move(Lawn lawn, LawnMowerInstructionList instructions) {
+    public void move(Lawn lawn, LawnMowerInstructions instructions) {
         if (instructions == null) {
             return;
         }
 
         // Iterate through each instruction and execute the corresponding action
-        instructions.getInstructions().forEach(instruction -> {
+        instructions.getList().forEach(instruction -> {
             switch (instruction) {
                 case FORWARD -> {
                     // Move forward based on the current orientation, ensuring it stays within the lawn boundaries

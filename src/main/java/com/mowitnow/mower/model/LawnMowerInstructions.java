@@ -8,14 +8,15 @@ import java.util.List;
 /**
  * Represents a list of instructions for a lawn mower
  */
-public class LawnMowerInstructionList {
-    private final List<InstructionEnum> instructions; // List to store the instructions
+public class LawnMowerInstructions {
+    // List to store the instructions
+    private final List<InstructionEnum> list;
 
     /**
      * Constructor to create a list of instructions from a string
      */
-    public LawnMowerInstructionList(String instructionString) {
-        this.instructions = new ArrayList<>();
+    public LawnMowerInstructions(String instructionString) {
+        this.list = new ArrayList<>();
 
         // Check if the instruction string is null or empty
         if (instructionString == null || instructionString.isBlank()) {
@@ -24,12 +25,12 @@ public class LawnMowerInstructionList {
 
         // Iterate through each character in the instruction string and convert it to an InstructionEnum
         for (char c : instructionString.toCharArray()) {
-            instructions.add(InstructionEnum.fromValue(c)); // Add the corresponding InstructionEnum to the list
+            list.add(InstructionEnum.fromValue(c)); // Add the corresponding InstructionEnum to the list
         }
     }
 
     // Get the list of instructions
-    public List<InstructionEnum> getInstructions() {
-        return instructions;
+    public List<InstructionEnum> getList() {
+        return list;
     }
 }

@@ -2,7 +2,7 @@ package com.mowitnow.mower.manager;
 
 import com.mowitnow.mower.model.Lawn;
 import com.mowitnow.mower.model.LawnMower;
-import com.mowitnow.mower.model.LawnMowerInstructionList;
+import com.mowitnow.mower.model.LawnMowerInstructions;
 import com.mowitnow.mower.model.enums.InstructionEnum;
 import com.mowitnow.mower.model.enums.OrientationEnum;
 import com.mowitnow.mower.provider.MowerInputData;
@@ -22,13 +22,13 @@ class LawnMowerManagerTest {
 
         // Act
         manager.createLawnMowerInstruction(mowerInputData);
-        Map<LawnMower, LawnMowerInstructionList> instructionsMap = manager.getLawnMowersInstructionsMap();
+        Map<LawnMower, LawnMowerInstructions> instructionsMap = manager.getLawnMowersInstructionsMap();
 
         // Assert
         assertEquals(1, instructionsMap.size());
         assertTrue(instructionsMap.containsKey(new LawnMower(1, 2, OrientationEnum.NORTH)));
 
-        String instructionsString = instructionsMap.get(new LawnMower(1, 2, OrientationEnum.NORTH)).getInstructions().stream()
+        String instructionsString = instructionsMap.get(new LawnMower(1, 2, OrientationEnum.NORTH)).getList().stream()
                 .map(InstructionEnum::getValue)
                 .map(String::valueOf) // Convert char to String
                 .collect(Collectors.joining());
