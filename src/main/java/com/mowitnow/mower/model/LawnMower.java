@@ -4,16 +4,14 @@ public class LawnMower {
     private int x;
     private int y;
     private OrientationEnum orientationEnum;
-    private LawnMowerInstructions instructions;
 
-    public LawnMower(int x, int y, OrientationEnum orientationEnum, LawnMowerInstructions instructions) {
+    public LawnMower(int x, int y, OrientationEnum orientationEnum) {
         this.x = x;
         this.y = y;
         this.orientationEnum = orientationEnum;
-        this.instructions = instructions;
     }
 
-    public void move(Lawn lawn) {
+    public void move(Lawn lawn, LawnMowerInstructions instructions) {
         if (instructions == null) {
             return;
         }

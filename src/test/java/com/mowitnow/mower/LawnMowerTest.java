@@ -11,25 +11,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class LawnMowerTest {
 
     @Test
-    public void testMove() {
-        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH, new LawnMowerInstructions("GAGAGAGAA"));
-        mower.move(new Lawn(5, 5));
-        assertEquals("1 3 N", mower.getPosition());
+    public void sanitizeMove() {
+        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
+        mower.move(new Lawn(5, 5), null);
+        assertEquals("1 2 N", mower.getPosition());
 
-        mower = new LawnMower(3, 3, OrientationEnum.EAST, new LawnMowerInstructions("AADAADADDA"));
-        mower.move(new Lawn(5, 5));
-        assertEquals("5 1 E", mower.getPosition());
-    }
-
-    @Test
-    public void sanitizeGetPosition() {
-        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH, null);
+        mower = new LawnMower(1, 2, OrientationEnum.NORTH);
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions(""));
         assertEquals("1 2 N", mower.getPosition());
     }
 
     @Test
+    public void testMove() {
+        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions("GAGAGAGAA"));
+        assertEquals("1 3 N", mower.getPosition());
+
+        mower = new LawnMower(3, 3, OrientationEnum.EAST);
+        mower.move(new Lawn(5, 5), new LawnMowerInstructions("AADAADADDA"));
+        assertEquals("5 1 E", mower.getPosition());
+    }
+
+    @Test
     public void testGetPosition() {
-        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH, new LawnMowerInstructions(""));
+        LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
         assertEquals("1 2 N", mower.getPosition());
     }
 

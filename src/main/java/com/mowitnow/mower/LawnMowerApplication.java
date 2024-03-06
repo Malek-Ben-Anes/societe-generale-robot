@@ -39,8 +39,8 @@ public class LawnMowerApplication {
         LawnMowerInstructions instruction1 = new LawnMowerInstructions("GAGAGAGAA");
         LawnMowerInstructions instruction2 = new LawnMowerInstructions("AADAADADDA");
 
-        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH, instruction1));
-        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST, instruction2));
+        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH), instruction1);
+        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST), instruction2);
 
         manager.runAllMowers();
     }
