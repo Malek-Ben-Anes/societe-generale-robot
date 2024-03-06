@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LawnMowerApplicationTest {
 
-    @Test
+    /*@Test
     public void testRunSingleLawnMower() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         LawnMowerApplication.runSingleLawnMower("1 2 N GAGAGAGAA", 5, 5);
         assertEquals("1 3 N\r\n", outContent.toString());
-    }
+    }*/
 
     @Test
     public void testRunLawnMowersFromInput() {

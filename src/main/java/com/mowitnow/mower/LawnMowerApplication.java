@@ -1,5 +1,11 @@
 package com.mowitnow.mower;
 
+import com.mowitnow.mower.manager.LawnMowerManager;
+import com.mowitnow.mower.model.Lawn;
+import com.mowitnow.mower.model.LawnMower;
+import com.mowitnow.mower.model.LawnMowerInstructions;
+import com.mowitnow.mower.model.OrientationEnum;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +32,20 @@ public class LawnMowerApplication {
     }
 
     public static void runLawnMowersFromInput() {
+        // Define lawn dimensions
+        Lawn lawn = new Lawn(5, 5);
+        LawnMowerManager manager = new LawnMowerManager(lawn);
+
+        LawnMowerInstructions instruction1 = new LawnMowerInstructions("GAGAGAGAA");
+        LawnMowerInstructions instruction2 = new LawnMowerInstructions("AADAADADDA");
+
+        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH, instruction1));
+        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST, instruction2));
+
+        manager.runAllMowers();
+    }
+
+    /*public static void runLawnMowersFromInput() {
         String[] dimensions = {"5", "5"}; // Default dimensions
         int maxX = Integer.parseInt(dimensions[0]);
         int maxY = Integer.parseInt(dimensions[1]);
@@ -46,7 +66,7 @@ public class LawnMowerApplication {
         LawnMower lawnMower = new LawnMower(x, y, orientation);
         lawnMower.move(instructions, maxX, maxY);
         System.out.println(lawnMower.getPosition());
-    }
+    }*/
 
     public static void runLawnMowersFromFile() {
         try {
@@ -59,7 +79,7 @@ public class LawnMowerApplication {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                runSingleLawnMower(line, maxX, maxY);
+                // runSingleLawnMower(line, maxX, maxY);
             }
 
             reader.close();
