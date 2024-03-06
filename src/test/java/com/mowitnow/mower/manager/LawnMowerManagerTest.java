@@ -21,7 +21,7 @@ public class LawnMowerManagerTest {
         MowerData mowerData = new MowerData(1, 2, 'N', "GAGAGAGAA");
 
         // Act
-        manager.creatLawnMowerInstruction(mowerData);
+        manager.createLawnMowerInstruction(mowerData);
         Map<LawnMower, LawnMowerInstructionList> instructionsMap = manager.getLawnMowersInstructionsMap();
 
         // Assert
@@ -40,8 +40,8 @@ public class LawnMowerManagerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMowerManager manager = new LawnMowerManager(lawn);
-        manager.creatLawnMowerInstruction(new MowerData(1, 2, 'N', "GAGAGAGAA"));
-        manager.creatLawnMowerInstruction(new MowerData(3, 3, 'E', "AADAADADDA"));
+        manager.createLawnMowerInstruction(new MowerData(1, 2, 'N', "GAGAGAGAA"));
+        manager.createLawnMowerInstruction(new MowerData(3, 3, 'E', "AADAADADDA"));
 
         // Act & Assert
         assertDoesNotThrow(() -> manager.runAllMowers());

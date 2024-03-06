@@ -4,25 +4,30 @@ import com.mowitnow.mower.model.enums.OrientationEnum;
 
 import java.util.Objects;
 
+// Represents a lawn mower with a position and orientation
 public class LawnMower {
-    private int x;
-    private int y;
-    private OrientationEnum orientationEnum;
+    private int x; // X coordinate of the lawn mower
+    private int y; // Y coordinate of the lawn mower
+    private OrientationEnum orientationEnum; // Orientation of the lawn mower
 
+    // Constructor to initialize the lawn mower with coordinates and orientation
     public LawnMower(int x, int y, OrientationEnum orientationEnum) {
         this.x = x;
         this.y = y;
         this.orientationEnum = orientationEnum;
     }
 
+    // Move the lawn mower according to the instructions provided
     public void move(Lawn lawn, LawnMowerInstructionList instructions) {
         if (instructions == null) {
             return;
         }
 
+        // Iterate through each instruction and execute the corresponding action
         instructions.getInstructions().forEach(instruction -> {
             switch (instruction) {
                 case FORWARD -> {
+                    // Move forward based on the current orientation, ensuring it stays within the lawn boundaries
                     switch (orientationEnum) {
                         case NORTH -> y = Math.min(y + 1, lawn.height());
                         case EAST -> x = Math.min(x + 1, lawn.width());
@@ -30,12 +35,13 @@ public class LawnMower {
                         case WEST -> x = Math.max(x - 1, 0);
                     }
                 }
-                case RIGHT -> orientationEnum = orientationEnum.turnRight();
-                case LEFT -> orientationEnum = orientationEnum.turnLeft();
+                case RIGHT -> orientationEnum = orientationEnum.turnRight(); // Turn the lawn mower right
+                case LEFT -> orientationEnum = orientationEnum.turnLeft(); // Turn the lawn mower left
             }
         });
     }
 
+    // Get the position of the lawn mower as a formatted string
     public String getPosition() {
         return String.format("%d %d %c", x, y, orientationEnum.getValue());
     }
