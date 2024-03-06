@@ -1,6 +1,8 @@
 package com.mowitnow.mower.model;
 
-// Record representing the lawn dimensions
+/**
+ * Record representing the lawn dimensions
+ */
 public record Lawn(int width, int height) {
 
     // Constructor with validation for non-negative dimensions

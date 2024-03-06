@@ -4,7 +4,7 @@ import com.mowitnow.mower.model.Lawn;
 import com.mowitnow.mower.model.LawnMower;
 import com.mowitnow.mower.model.LawnMowerInstructionList;
 import com.mowitnow.mower.model.enums.OrientationEnum;
-import com.mowitnow.mower.provider.MowerData;
+import com.mowitnow.mower.provider.MowerInputData;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,11 +22,11 @@ public class LawnMowerManager {
     }
 
     // Method to create a new lawn mower with its instructions
-    public void createLawnMowerInstruction(MowerData mower) {
+    public void createLawnMowerInstruction(MowerInputData mower) {
         // Create instructions for the mower
-        var instructions = new LawnMowerInstructionList(mower.getInstructions());
+        var instructions = new LawnMowerInstructionList(mower.instructions());
         // Create a new lawn mower instance
-        var lawnMower = new LawnMower(mower.getX(), mower.getY(), OrientationEnum.fromValue(mower.getOrientation()));
+        var lawnMower = new LawnMower(mower.x(), mower.y(), OrientationEnum.fromValue(mower.orientation()));
         // Add the lawn mower and its instructions to the map
         lawnMowersInstructionsMap.put(lawnMower, instructions);
     }

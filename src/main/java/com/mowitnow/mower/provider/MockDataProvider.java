@@ -2,11 +2,12 @@ package com.mowitnow.mower.provider;
 
 public class MockDataProvider implements DataProvider {
 
-    public Data loadData() {
+    public InputData loadData() {
+        System.out.println("----------- Retrieve Data from Mock Data Provider -----------");
 
-        var data = new Data(5, 5);
-        data.getMowerInputs().add(new MowerData(1, 2, 'N', "GAGAGAGAA"));
-        data.getMowerInputs().add(new MowerData(3, 3, 'E', "AADAADADDA"));
+        var data = new InputData(5, 5);
+        data.mowerInputs().add(new MowerInputData(1, 2, 'N', "GAGAGAGAA"));
+        data.mowerInputs().add(new MowerInputData(3, 3, 'E', "AADAADADDA"));
 
         return data;
     }

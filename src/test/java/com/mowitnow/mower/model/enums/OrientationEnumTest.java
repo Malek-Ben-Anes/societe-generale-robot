@@ -3,10 +3,10 @@ package com.mowitnow.mower.model.enums;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OrientationEnumTest {
+class OrientationEnumTest {
 
     @Test
-    public void testFromValueValid() {
+    void testFromValueValid() {
         // Arrange
         char value = 'S';
 
@@ -18,7 +18,7 @@ public class OrientationEnumTest {
     }
 
     @Test
-    public void testFromValueInvalid() {
+    void testFromValueInvalid() {
         // Arrange
         char value = 'X'; // Invalid value
 
@@ -27,7 +27,7 @@ public class OrientationEnumTest {
     }
 
     @Test
-    public void testTurnRight() {
+    void testTurnRight() {
         // Arrange & Act
         OrientationEnum initialOrientation = OrientationEnum.NORTH;
         OrientationEnum nextOrientation = initialOrientation.turnRight().turnRight().turnRight();
@@ -37,7 +37,7 @@ public class OrientationEnumTest {
     }
 
     @Test
-    public void testTurnLeft() {
+    void testTurnLeft() {
         // Arrange & Act
         OrientationEnum initialOrientation = OrientationEnum.EAST;
         OrientationEnum nextOrientation = initialOrientation.turnLeft().turnLeft().turnLeft();

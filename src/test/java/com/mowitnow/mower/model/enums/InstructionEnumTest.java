@@ -3,10 +3,10 @@ package com.mowitnow.mower.model.enums;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InstructionEnumTest {
+class InstructionEnumTest {
 
     @Test
-    public void testGetValue() {
+    void testGetValue() {
         // Arrange
         char expectedValue = 'A';
 
@@ -18,7 +18,7 @@ public class InstructionEnumTest {
     }
 
     @Test
-    public void testFromValueValid() {
+    void testFromValueValid() {
         // Arrange
         char value = 'G';
 
@@ -30,7 +30,7 @@ public class InstructionEnumTest {
     }
 
     @Test
-    public void testFromValueInvalid() {
+    void testFromValueInvalid() {
         // Arrange
         char value = 'X'; // Invalid value
 

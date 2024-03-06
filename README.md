@@ -1,6 +1,6 @@
 # Socièté générale - Lawn Mower Program
 
-The Lawn Mower Program is a Java application designed to automate the movement of lawn mowers on a rectangular lawn. It reads input instructions from a file or predefined data, simulating the movement of multiple lawn mowers across the lawn surface.
+The Lawn Mower Program is a Java application designed to automate the movement of lawn mowers on a rectangular lawn. It reads input instructions from a file or predefined inputData, simulating the movement of multiple lawn mowers across the lawn surface.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ The Lawn Mower Program simulates the movement of lawn mowers on a rectangular la
 
 ## Features
 
-- Supports reading input data from a file or predefined data.
+- Supports reading input inputData from a file or predefined inputData.
 - Handles multiple lawn mowers moving simultaneously.
 - Checks for collisions and boundary conditions to ensure safe movement.
 - Provides detailed output of the final positions of each lawn mower.
@@ -78,7 +78,7 @@ This command allocates a pseudo-TTY and allows you to interact with the applicat
 
 ## Usage
 
-To use the Lawn Mower Program, you can either provide input data via a file or use predefined data within the code. The program will simulate the movement of lawn mowers according to the provided instructions and display the final positions of each lawn mower.
+To use the Lawn Mower Program, you can either provide input inputData via a file or use predefined inputData within the code. The program will simulate the movement of lawn mowers according to the provided instructions and display the final positions of each lawn mower.
 
 ## Documentation
 

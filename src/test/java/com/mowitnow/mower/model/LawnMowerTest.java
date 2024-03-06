@@ -4,10 +4,10 @@ import com.mowitnow.mower.model.enums.OrientationEnum;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LawnMowerTest {
+class LawnMowerTest {
 
     @Test
-    public void testMoveForwardNorth() {
+    void testMoveForwardNorth() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
@@ -21,7 +21,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testMoveForwardEast() {
+    void testMoveForwardEast() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.EAST);
@@ -35,7 +35,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testMoveForwardSouth() {
+    void testMoveForwardSouth() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.SOUTH);
@@ -49,7 +49,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testMoveForwardWest() {
+    void testMoveForwardWest() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.WEST);
@@ -63,7 +63,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testMoveRight() {
+    void testMoveRight() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
@@ -77,7 +77,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testMoveLeft() {
+    void testMoveLeft() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
@@ -91,7 +91,7 @@ public class LawnMowerTest {
     }
 
     @Test
-    public void testNoInstructions() {
+    void testNoInstructions() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);

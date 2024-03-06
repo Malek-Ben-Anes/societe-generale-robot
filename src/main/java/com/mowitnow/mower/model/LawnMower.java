@@ -4,11 +4,24 @@ import com.mowitnow.mower.model.enums.OrientationEnum;
 
 import java.util.Objects;
 
-// Represents a lawn mower with a position and orientation
+/**
+ * Represents a lawn mower with a position and orientation
+ */
 public class LawnMower {
-    private int x; // X coordinate of the lawn mower
-    private int y; // Y coordinate of the lawn mower
-    private OrientationEnum orientationEnum; // Orientation of the lawn mower
+
+    /**
+     * X coordinate of the lawn mower
+     */
+    private int x;
+    /**
+     * Y coordinate of the lawn mower
+     */
+    private int y;
+
+    /**
+     * Orientation of the lawn mower
+     */
+    private OrientationEnum orientationEnum;
 
     // Constructor to initialize the lawn mower with coordinates and orientation
     public LawnMower(int x, int y, OrientationEnum orientationEnum) {
@@ -17,7 +30,9 @@ public class LawnMower {
         this.orientationEnum = orientationEnum;
     }
 
-    // Move the lawn mower according to the instructions provided
+    /**
+     * Move the lawn mower according to the instructions provided
+     */
     public void move(Lawn lawn, LawnMowerInstructionList instructions) {
         if (instructions == null) {
             return;

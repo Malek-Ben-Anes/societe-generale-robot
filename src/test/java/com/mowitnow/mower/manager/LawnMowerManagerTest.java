@@ -5,23 +5,23 @@ import com.mowitnow.mower.model.LawnMower;
 import com.mowitnow.mower.model.LawnMowerInstructionList;
 import com.mowitnow.mower.model.enums.InstructionEnum;
 import com.mowitnow.mower.model.enums.OrientationEnum;
-import com.mowitnow.mower.provider.MowerData;
+import com.mowitnow.mower.provider.MowerInputData;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LawnMowerManagerTest {
+class LawnMowerManagerTest {
 
     @Test
     void testCreateLawnMowerInstruction() {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMowerManager manager = new LawnMowerManager(lawn);
-        MowerData mowerData = new MowerData(1, 2, 'N', "GAGAGAGAA");
+        MowerInputData mowerInputData = new MowerInputData(1, 2, 'N', "GAGAGAGAA");
 
         // Act
-        manager.createLawnMowerInstruction(mowerData);
+        manager.createLawnMowerInstruction(mowerInputData);
         Map<LawnMower, LawnMowerInstructionList> instructionsMap = manager.getLawnMowersInstructionsMap();
 
         // Assert
@@ -40,8 +40,8 @@ public class LawnMowerManagerTest {
         // Arrange
         Lawn lawn = new Lawn(5, 5);
         LawnMowerManager manager = new LawnMowerManager(lawn);
-        manager.createLawnMowerInstruction(new MowerData(1, 2, 'N', "GAGAGAGAA"));
-        manager.createLawnMowerInstruction(new MowerData(3, 3, 'E', "AADAADADDA"));
+        manager.createLawnMowerInstruction(new MowerInputData(1, 2, 'N', "GAGAGAGAA"));
+        manager.createLawnMowerInstruction(new MowerInputData(3, 3, 'E', "AADAADADDA"));
 
         // Act & Assert
         assertDoesNotThrow(() -> manager.runAllMowers());

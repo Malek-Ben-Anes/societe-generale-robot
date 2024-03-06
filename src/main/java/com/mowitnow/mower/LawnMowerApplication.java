@@ -1,3 +1,7 @@
+/**
+ * This class represents the entry point for the Lawn Mower application.
+ * It provides a user interface to select the data provider and execute the lawn mower program.
+ */
 package com.mowitnow.mower;
 
 import com.mowitnow.mower.manager.LawnMowerManager;
@@ -8,17 +12,35 @@ import java.util.Scanner;
 
 public class LawnMowerApplication {
 
+    /**
+     * The main method of the application. It starts the application, selects the data provider,
+     * and executes the lawn mower program.
+     *
+     * @param args The command line arguments (not used).
+     */
     public static void main(String[] args) {
+        DataProvider dataProvider = selectDataProvider();
+        if (dataProvider != null) {
+            executeLawnMowerProgram(dataProvider.loadData());
+        }
+    }
+
+    /**
+     * Allows the user to select the data provider for the lawn mower program.
+     *
+     * @return The selected DataProvider instance.
+     */
+    private static DataProvider selectDataProvider() {
         Scanner scanner = new Scanner(System.in);
         int choice;
-
-        DataProvider dataProvider = null;
+        DataProvider dataProvider;
 
         // User menu for selecting data source
         do {
             printMenu(); // Print menu options
             choice = scanner.nextInt(); // Read user choice
             scanner.nextLine(); // Consume the newline character after reading the integer
+            dataProvider = null;
 
             // Select data provider based on user choice
             switch (choice) {
@@ -29,13 +51,12 @@ public class LawnMowerApplication {
             }
         } while (choice != 0 && choice != 1 && choice != 2); // Repeat until valid choice is made
 
-        // Execute program if data provider is selected
-        if (dataProvider != null) {
-            executeLawnMowerProgram(dataProvider.loadData()); // Execute program with loaded data
-        }
+        return dataProvider;
     }
 
-    // Print menu options
+    /**
+     * Prints the menu for selecting the data provider.
+     */
     private static void printMenu() {
         System.out.println("----------- Menu -----------");
         System.out.println("1. Read Inputs from input.txt file");
@@ -44,19 +65,19 @@ public class LawnMowerApplication {
         System.out.print("Enter your choice: ");
     }
 
-    // Execute lawn mower program with given data
-    public static void executeLawnMowerProgram(final Data data) {
-        // Create lawn with dimensions from data
-        Lawn lawn = new Lawn(data.getMaxX(), data.getMaxY());
-        // Create lawn mower manager
+    /**
+     * Executes the lawn mower program with the provided input data.
+     *
+     * @param inputData The input data for the lawn mower program.
+     */
+    public static void executeLawnMowerProgram(final InputData inputData) {
+        Lawn lawn = new Lawn(inputData.maxX(), inputData.maxY());
         LawnMowerManager manager = new LawnMowerManager(lawn);
 
-        // Create lawn mowers with their instructions
-        for (final MowerData mower : data.getMowerInputs()) {
+        for (final MowerInputData mower : inputData.mowerInputs()) {
             manager.createLawnMowerInstruction(mower);
         }
 
-        // Run all lawn mowers and print final positions
         System.out.println("----------- Print final result -----------");
         manager.runAllMowers();
     }

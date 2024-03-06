@@ -4,10 +4,10 @@ import com.mowitnow.mower.model.enums.InstructionEnum;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LawnMowerInstructionListTest {
+class LawnMowerInstructionListTest {
 
     @Test
-    public void testInstructionListCreation() {
+    void testInstructionListCreation() {
         // Arrange
         String instructionString = "AGD";
 
@@ -22,7 +22,7 @@ public class LawnMowerInstructionListTest {
     }
 
     @Test
-    public void testEmptyInstructionListCreation() {
+    void testEmptyInstructionListCreation() {
         // Arrange
         String instructionString = "";
 
@@ -34,7 +34,7 @@ public class LawnMowerInstructionListTest {
     }
 
     @Test
-    public void testNullInstructionListCreation() {
+    void testNullInstructionListCreation() {
         // Arrange
         String instructionString = null;
 
@@ -46,7 +46,7 @@ public class LawnMowerInstructionListTest {
     }
 
     @Test
-    public void testBlankInstructionListCreation() {
+    void testBlankInstructionListCreation() {
         // Arrange
         String instructionString = null;
 

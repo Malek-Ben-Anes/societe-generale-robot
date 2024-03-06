@@ -5,11 +5,15 @@ import com.mowitnow.mower.model.enums.InstructionEnum;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a list of instructions for a lawn mower
+/**
+ * Represents a list of instructions for a lawn mower
+ */
 public class LawnMowerInstructionList {
     private final List<InstructionEnum> instructions; // List to store the instructions
 
-    // Constructor to create a list of instructions from a string
+    /**
+     * Constructor to create a list of instructions from a string
+     */
     public LawnMowerInstructionList(String instructionString) {
         this.instructions = new ArrayList<>();
 

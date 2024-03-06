@@ -18,6 +18,9 @@ public enum OrientationEnum {
         return value;
     }
 
+    /**
+     * Static method to get enum from character
+     */
     public static OrientationEnum fromValue(char value) {
         return Arrays.stream(values())
                 .filter(orientation -> orientation.getValue() == value)
