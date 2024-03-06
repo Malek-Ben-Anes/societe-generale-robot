@@ -1,4 +1,4 @@
-package com.mowitnow.mower.model;
+package com.mowitnow.mower.model.enums;
 
 public enum OrientationEnum {
     NORTH('N'),
@@ -6,14 +6,14 @@ public enum OrientationEnum {
     SOUTH('S'),
     WEST('W');
 
-    private final char symbol;
+    private final char value;
 
-    OrientationEnum(char symbol) {
-        this.symbol = symbol;
+    OrientationEnum(char value) {
+        this.value = value;
     }
 
-    public char getSymbol() {
-        return symbol;
+    public char getValue() {
+        return value;
     }
 
     // Optional: Get the next orientation when turning right

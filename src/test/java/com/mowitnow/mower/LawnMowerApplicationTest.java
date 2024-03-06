@@ -19,7 +19,7 @@ class LawnMowerApplicationTest {
     }*/
 
     @Test
-    public void testRunLawnMowersFromInput() {
+    void testRunLawnMowersFromInput() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 

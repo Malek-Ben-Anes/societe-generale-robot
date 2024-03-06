@@ -3,8 +3,8 @@ package com.mowitnow.mower;
 import com.mowitnow.mower.manager.LawnMowerManager;
 import com.mowitnow.mower.model.Lawn;
 import com.mowitnow.mower.model.LawnMower;
-import com.mowitnow.mower.model.LawnMowerInstructions;
-import com.mowitnow.mower.model.OrientationEnum;
+import com.mowitnow.mower.model.LawnMowerInstructionList;
+import com.mowitnow.mower.model.enums.OrientationEnum;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,11 +36,11 @@ public class LawnMowerApplication {
         Lawn lawn = new Lawn(5, 5);
         LawnMowerManager manager = new LawnMowerManager(lawn);
 
-        LawnMowerInstructions instruction1 = new LawnMowerInstructions("GAGAGAGAA");
-        LawnMowerInstructions instruction2 = new LawnMowerInstructions("AADAADADDA");
+        LawnMowerInstructionList instructions1 = new LawnMowerInstructionList("GAGAGAGAA");
+        LawnMowerInstructionList instructions2 = new LawnMowerInstructionList("AADAADADDA");
 
-        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH), instruction1);
-        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST), instruction2);
+        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH), instructions1);
+        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST), instructions2);
 
         manager.runAllMowers();
     }

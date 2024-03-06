@@ -1,19 +1,9 @@
 package com.mowitnow.mower.model;
 
-public class Lawn {
-    private final int width;
-    private final int height;
-
-    public Lawn(int maxX, int height) {
-        this.width = maxX;
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+public record Lawn(int width, int height) {
+    public Lawn {
+        if (width < 0 || height < 0) {
+            throw new IllegalArgumentException("Width and height must be non-negative");
+        }
     }
 }

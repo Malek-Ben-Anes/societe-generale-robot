@@ -1,5 +1,7 @@
 package com.mowitnow.mower.model;
 
+import com.mowitnow.mower.model.enums.OrientationEnum;
+
 public class LawnMower {
     private int x;
     private int y;
@@ -11,7 +13,7 @@ public class LawnMower {
         this.orientationEnum = orientationEnum;
     }
 
-    public void move(Lawn lawn, LawnMowerInstructions instructions) {
+    public void move(Lawn lawn, LawnMowerInstructionList instructions) {
         if (instructions == null) {
             return;
         }
@@ -20,8 +22,8 @@ public class LawnMower {
             switch (instruction) {
                 case FORWARD -> {
                     switch (orientationEnum) {
-                        case NORTH -> { if (y < lawn.getHeight()) y++; }
-                        case EAST -> { if (x < lawn.getWidth()) x++; }
+                        case NORTH -> { if (y < lawn.height()) y++; }
+                        case EAST -> { if (x < lawn.width()) x++; }
                         case SOUTH -> { if (y > 0) y--; }
                         case WEST -> { if (x > 0) x--; }
                     }
@@ -33,6 +35,6 @@ public class LawnMower {
     }
 
     public String getPosition() {
-        return "%d %d %c".formatted(x, y, orientationEnum.getSymbol());
+        return "%d %d %c".formatted(x, y, orientationEnum.getValue());
     }
 }
