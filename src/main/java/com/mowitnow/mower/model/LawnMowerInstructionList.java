@@ -10,6 +10,9 @@ public class LawnMowerInstructionList {
 
     public LawnMowerInstructionList(String instructionString) {
         this.instructions = new ArrayList<>();
+        if (instructionString == null || instructionString.isBlank()) {
+            return;
+        }
         for (char c : instructionString.toCharArray()) {
             instructions.add(InstructionEnum.fromValue(c));
         }

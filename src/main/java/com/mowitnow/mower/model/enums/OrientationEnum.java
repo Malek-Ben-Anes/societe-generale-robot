@@ -1,5 +1,7 @@
 package com.mowitnow.mower.model.enums;
 
+import java.util.Arrays;
+
 public enum OrientationEnum {
     NORTH('N'),
     EAST('E'),
@@ -16,35 +18,28 @@ public enum OrientationEnum {
         return value;
     }
 
-    // Optional: Get the next orientation when turning right
-    public OrientationEnum turnRight() {
-        switch (this) {
-            case NORTH:
-                return EAST;
-            case EAST:
-                return SOUTH;
-            case SOUTH:
-                return WEST;
-            case WEST:
-                return NORTH;
-            default:
-                throw new IllegalArgumentException("Invalid orientation");
-        }
+    public static OrientationEnum fromValue(char value) {
+        return Arrays.stream(values())
+                .filter(orientation -> orientation.getValue() == value)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No enum constant found for value: " + value));
     }
 
-    // Optional: Get the next orientation when turning left
+    public OrientationEnum turnRight() {
+        return switch (this) {
+            case NORTH -> EAST;
+            case EAST -> SOUTH;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+        };
+    }
+
     public OrientationEnum turnLeft() {
-        switch (this) {
-            case NORTH:
-                return WEST;
-            case WEST:
-                return SOUTH;
-            case SOUTH:
-                return EAST;
-            case EAST:
-                return NORTH;
-            default:
-                throw new IllegalArgumentException("Invalid orientation");
-        }
+        return switch (this) {
+            case NORTH -> WEST;
+            case WEST -> SOUTH;
+            case SOUTH -> EAST;
+            case EAST -> NORTH;
+        };
     }
 }

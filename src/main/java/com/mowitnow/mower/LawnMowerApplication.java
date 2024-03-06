@@ -2,90 +2,52 @@ package com.mowitnow.mower;
 
 import com.mowitnow.mower.manager.LawnMowerManager;
 import com.mowitnow.mower.model.Lawn;
-import com.mowitnow.mower.model.LawnMower;
-import com.mowitnow.mower.model.LawnMowerInstructionList;
-import com.mowitnow.mower.model.enums.OrientationEnum;
+import com.mowitnow.mower.provider.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class LawnMowerApplication {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
 
-        System.out.println("Hello from Lawn Mower Program!");
+        DataProvider dataProvider = null;
+        do {
+            printMenu();
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character after reading the integer
 
-        // read file
-        runLawnMowersFromInput();
+            switch (choice) {
+                case 1 -> dataProvider = new FileDataProvider();
+                case 2 -> dataProvider = new MockDataProvider();
+                case 0 -> System.out.println("Exiting the program.");
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 0 && choice != 1 && choice != 2);
 
-        // read dimension
-
-        // detect 3 lawn mowers to program
-
-        // move each lawn mower
-
-        // final result
-
-        System.out.println("END of Lawn Mower Program!");
+        if (dataProvider != null) {
+            executeLawnMowerProgram(dataProvider.loadData());
+        }
     }
 
-    public static void runLawnMowersFromInput() {
-        // Define lawn dimensions
-        Lawn lawn = new Lawn(5, 5);
+    private static void printMenu() {
+        System.out.println("----------- Menu -----------");
+        System.out.println("1. Read Inputs from input.txt file");
+        System.out.println("2. Retrieve data from static java code");
+        System.out.println("0. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    public static void executeLawnMowerProgram(final Data data) {
+        Lawn lawn = new Lawn(data.getMaxX(), data.getMaxY());
         LawnMowerManager manager = new LawnMowerManager(lawn);
 
-        LawnMowerInstructionList instructions1 = new LawnMowerInstructionList("GAGAGAGAA");
-        LawnMowerInstructionList instructions2 = new LawnMowerInstructionList("AADAADADDA");
+        for (final MowerData mower : data.getMowerInputs()) {
+            manager.creatLawnMowerInstruction(mower);
+        }
 
-        manager.addLawnMower(new LawnMower(1, 2, OrientationEnum.NORTH), instructions1);
-        manager.addLawnMower(new LawnMower(3, 3, OrientationEnum.EAST), instructions2);
-
+        System.out.println("----------- Print final result -----------");
         manager.runAllMowers();
     }
-
-    /*public static void runLawnMowersFromInput() {
-        String[] dimensions = {"5", "5"}; // Default dimensions
-        int maxX = Integer.parseInt(dimensions[0]);
-        int maxY = Integer.parseInt(dimensions[1]);
-
-        String[] lines = {"1 2 N GAGAGAGAA", "3 3 E AADAADADDA"}; // Default mower instructions
-        for (var line: lines) {
-            runSingleLawnMower(line, maxX, maxY);
-        }
-    }
-
-    public static void runSingleLawnMower(String input, int maxX, int maxY) {
-        String[] parts = input.split(" ");
-        int x = Integer.parseInt(parts[0]);
-        int y = Integer.parseInt(parts[1]);
-        char orientation = parts[2].charAt(0);
-        String instructions = parts[3];
-
-        LawnMower lawnMower = new LawnMower(x, y, orientation);
-        lawnMower.move(instructions, maxX, maxY);
-        System.out.println(lawnMower.getPosition());
-    }*/
-
-    public static void runLawnMowersFromFile() {
-        try {
-            InputStream inputStream = LawnMowerApplication.class.getResourceAsStream("/input.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String[] dimensions = reader.readLine().split(" ");
-            int maxX = Integer.parseInt(dimensions[0]);
-            int maxY = Integer.parseInt(dimensions[1]);
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // runSingleLawnMower(line, maxX, maxY);
-            }
-
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

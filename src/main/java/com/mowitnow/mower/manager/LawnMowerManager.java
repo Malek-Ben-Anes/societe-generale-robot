@@ -3,6 +3,8 @@ package com.mowitnow.mower.manager;
 import com.mowitnow.mower.model.Lawn;
 import com.mowitnow.mower.model.LawnMower;
 import com.mowitnow.mower.model.LawnMowerInstructionList;
+import com.mowitnow.mower.model.enums.OrientationEnum;
+import com.mowitnow.mower.provider.MowerData;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +18,10 @@ public class LawnMowerManager {
         this.lawnMowersInstructionsMap = new LinkedHashMap<>();
     }
 
-    public void addLawnMower(LawnMower lawnMower, LawnMowerInstructionList instructions) {
+    public void creatLawnMowerInstruction(MowerData mower) {
+        var instructions = new LawnMowerInstructionList(mower.getInstructions());
+        var lawnMower = new LawnMower(mower.getX(), mower.getY(),
+                OrientationEnum.fromValue(mower.getOrientation()));
         lawnMowersInstructionsMap.put(lawnMower, instructions);
     }
 
@@ -27,5 +32,9 @@ public class LawnMowerManager {
             lawnMower.move(lawn, instructions);
             System.out.println(lawnMower.getPosition());
         }
+    }
+
+    public Map<LawnMower, LawnMowerInstructionList> getLawnMowersInstructionsMap() {
+        return lawnMowersInstructionsMap;
     }
 }

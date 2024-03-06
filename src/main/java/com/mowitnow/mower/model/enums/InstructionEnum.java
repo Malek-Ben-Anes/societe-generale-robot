@@ -1,5 +1,7 @@
 package com.mowitnow.mower.model.enums;
 
+import java.util.Arrays;
+
 public enum InstructionEnum {
     // Avance
     FORWARD('A'),
@@ -22,11 +24,9 @@ public enum InstructionEnum {
 
     // Static method to get enum from character
     public static InstructionEnum fromValue(char value) {
-        for (InstructionEnum instruction : InstructionEnum.values()) {
-            if (instruction.getValue() == value) {
-                return instruction;
-            }
-        }
-        throw new IllegalArgumentException("No enum constant found for value: " + value);
+        return Arrays.stream(values())
+                .filter(instruction -> instruction.value == value)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No enum constant found for value: " + value));
     }
 }

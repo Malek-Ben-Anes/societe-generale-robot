@@ -1,5 +1,7 @@
 package com.mowitnow.mower;
 
+import com.mowitnow.mower.provider.FileDataProvider;
+import com.mowitnow.mower.provider.MockDataProvider;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -9,22 +11,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LawnMowerApplicationTest {
 
-    /*@Test
-    public void testRunSingleLawnMower() {
+    @Test
+    public void testExecuteLawnMowerProgramFromFile() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        LawnMowerApplication.runSingleLawnMower("1 2 N GAGAGAGAA", 5, 5);
-        assertEquals("1 3 N\r\n", outContent.toString());
-    }*/
+        LawnMowerApplication.executeLawnMowerProgram(new FileDataProvider().loadData());
+        var expected = "----------- Print final result ----------- 1 3 N 5 1 E".replaceAll("[\\r\\n\\s]", "");
+        var result = outContent.toString().replaceAll("[\\r\\n\\s]", "");
+        assertEquals(expected, result);
+    }
 
     @Test
-    void testRunLawnMowersFromInput() {
+    void testExecuteLawnMowerProgramFromMockData() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        LawnMowerApplication.runLawnMowersFromInput();
-        assertEquals("1 3 N\r\n5 1 E\r\n", outContent.toString());
+        LawnMowerApplication.executeLawnMowerProgram(new MockDataProvider().loadData());
+        var expected = "----------- Print final result ----------- 1 3 N 5 1 E".replaceAll("[\\r\\n\\s]", "");
+        var result = outContent.toString().replaceAll("[\\r\\n\\s]", "");
+        assertEquals(expected, result);
     }
 
 }
