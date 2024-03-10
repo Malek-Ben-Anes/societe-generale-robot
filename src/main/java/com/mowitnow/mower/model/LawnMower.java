@@ -33,7 +33,7 @@ public class LawnMower {
     /**
      * Move the lawn mower according to the instructions provided
      */
-    public void move(Lawn lawn, LawnMowerInstructions instructions) {
+    public void executeProgram(Lawn lawn, LawnMowerInstructions instructions) {
         if (instructions == null) {
             return;
         }

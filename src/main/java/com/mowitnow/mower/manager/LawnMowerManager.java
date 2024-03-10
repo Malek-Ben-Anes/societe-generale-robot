@@ -37,13 +37,13 @@ public class LawnMowerManager {
     }
 
     // Method to run all lawn mowers and print their final positions
-    public void runAllMowers() {
-        LOGGER.info("\n\n----------- Running All Lawn mowers -----------");
+    public void executeAllMowersPrograms() {
+        LOGGER.info("\n\n----------- Executing All Lawn mowers -----------");
         for (Map.Entry<LawnMower, LawnMowerInstructions> entry : lawnMowersInstructionsMap.entrySet()) {
             LawnMower lawnMower = entry.getKey();
             LawnMowerInstructions instructions = entry.getValue();
             // Move the lawn mower according to its instructions
-            lawnMower.move(lawn, instructions);
+            lawnMower.executeProgram(lawn, instructions);
             // Print the final position of the lawn mower
             LOGGER.info(lawnMower.getPosition());
         }

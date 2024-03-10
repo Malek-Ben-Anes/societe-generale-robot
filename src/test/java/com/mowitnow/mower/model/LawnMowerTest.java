@@ -14,7 +14,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("3 4 E", mower.getPosition());
@@ -28,7 +28,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("4 3 S", mower.getPosition());
@@ -42,7 +42,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("3 2 W", mower.getPosition());
@@ -56,7 +56,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("2 3 N", mower.getPosition());
@@ -70,7 +70,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("D"); // Turn Right
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("3 3 E", mower.getPosition());
@@ -84,7 +84,7 @@ class LawnMowerTest {
         LawnMowerInstructions instructions = new LawnMowerInstructions("G"); // Turn Left
 
         // Act
-        mower.move(lawn, instructions);
+        mower.executeProgram(lawn, instructions);
 
         // Assert
         assertEquals("3 3 W", mower.getPosition());
@@ -97,7 +97,7 @@ class LawnMowerTest {
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
 
         // Act
-        mower.move(lawn, null);
+        mower.executeProgram(lawn, null);
 
         // Assert
         assertEquals("3 3 N", mower.getPosition());
@@ -107,22 +107,22 @@ class LawnMowerTest {
     @Test
     void sanitizeMove() {
         LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
-        mower.move(new Lawn(5, 5), null);
+        mower.executeProgram(new Lawn(5, 5), null);
         assertEquals("1 2 N", mower.getPosition());
 
         mower = new LawnMower(1, 2, OrientationEnum.NORTH);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructions(""));
+        mower.executeProgram(new Lawn(5, 5), new LawnMowerInstructions(""));
         assertEquals("1 2 N", mower.getPosition());
     }
 
     @Test
     void testMove() {
         LawnMower mower = new LawnMower(1, 2, OrientationEnum.NORTH);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructions("GAGAGAGAA"));
+        mower.executeProgram(new Lawn(5, 5), new LawnMowerInstructions("GAGAGAGAA"));
         assertEquals("1 3 N", mower.getPosition());
 
         mower = new LawnMower(3, 3, OrientationEnum.EAST);
-        mower.move(new Lawn(5, 5), new LawnMowerInstructions("AADAADADDA"));
+        mower.executeProgram(new Lawn(5, 5), new LawnMowerInstructions("AADAADADDA"));
         assertEquals("5 1 E", mower.getPosition());
     }
 

@@ -14,7 +14,7 @@ public class FileDataProvider implements DataProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileDataProvider.class);
 
     // File name for input data
-    public static final String INPUT_FILE_NAME = "/input.txt";
+    public static final String INPUT_FILE_NAME = "/data/input.txt";
 
     /**
      * Load data from input file.
