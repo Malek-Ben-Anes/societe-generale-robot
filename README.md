@@ -1,4 +1,4 @@
-# Socièté générale - Lawn Mower Program
+# Socièté générale - Lawn Mower Program [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Malek-Ben-Anes_societe-generale-robot&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Malek-Ben-Anes_societe-generale-robot)
 
 The Lawn Mower Program is a Java application designed to automate the movement of lawn mowers on a rectangular lawn. It reads input instructions from a file or predefined inputData, simulating the movement of multiple lawn mowers across the lawn surface.
 
