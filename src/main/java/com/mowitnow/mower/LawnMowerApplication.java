@@ -23,7 +23,7 @@ public class LawnMowerApplication {
      * @param args The command line arguments (not used).
      */
     public static void main(String[] args) {
-        DataProvider dataProvider = selectDataProvider();
+        final DataProvider dataProvider = selectDataProvider();
         if (dataProvider != null) {
             executeLawnMowerProgram(dataProvider.loadData());
         }
@@ -85,6 +85,6 @@ public class LawnMowerApplication {
             manager.createLawnMowerInstruction(mower);
         }
 
-        manager.runAllMowers();
+        manager.executeAllMowersPrograms();
     }
 }

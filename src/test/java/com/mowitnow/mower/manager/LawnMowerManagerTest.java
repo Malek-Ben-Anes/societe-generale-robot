@@ -44,6 +44,6 @@ class LawnMowerManagerTest {
         manager.createLawnMowerInstruction(new MowerInputData(3, 3, 'E', "AADAADADDA"));
 
         // Act & Assert
-        assertDoesNotThrow(() -> manager.runAllMowers());
+        assertDoesNotThrow(() -> manager.executeAllMowersPrograms());
     }
 }
