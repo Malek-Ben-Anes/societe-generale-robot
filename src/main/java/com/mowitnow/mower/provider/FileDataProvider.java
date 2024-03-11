@@ -1,13 +1,13 @@
 package com.mowitnow.mower.provider;
 
-import com.mowitnow.mower.LawnMowerApplication;
+import com.mowitnow.mower.utils.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class FileDataProvider implements DataProvider {
 
@@ -20,48 +20,59 @@ public class FileDataProvider implements DataProvider {
      * Load data from input file.
      *
      * @return InputData object containing lawn dimensions and mower inputs
+     * @throws RuntimeException if there is an error while loading or parsing the data
      */
     public InputData loadData() {
-        LOGGER.info("----------- Retrieve Data from 'input.txt' File -----------");
+        LOGGER.info("----------- Retrieving Data from '{}' File -----------", INPUT_FILE_NAME);
 
-        try (InputStream inputStream = LawnMowerApplication.class.getResourceAsStream(INPUT_FILE_NAME);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            // Read dimensions of the lawn
-            String[] dimensions = reader.readLine().split(" ");
-            int maxX = Integer.parseInt(dimensions[0]);
-            int maxY = Integer.parseInt(dimensions[1]);
-
-            // Create data object with lawn dimensions
-            InputData inputData = new InputData(maxX, maxY);
-            int startIdx = 2;
-
-            // Read mower inputs and add to data object
-            while (startIdx < dimensions.length) {
-                inputData.mowerInputs().add(runSingleLawnMower(dimensions, startIdx));
-                startIdx += 4; // Increment index by 4 to skip to next mower input
-            }
-            return inputData;
-
+        List<String> fileContent;
+        try {
+            // Read input file
+            fileContent = FileUtils.readFileLines(INPUT_FILE_NAME);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle IO exception
+            throw new IllegalArgumentException("Error reading file: " + INPUT_FILE_NAME, e);
         }
-        return null;
+
+        if (fileContent.isEmpty()) {
+            throw new InputMismatchException("File content is empty: " + INPUT_FILE_NAME);
+        }
+
+        String firstLine = fileContent.get(0);
+        return parseData(firstLine);
+    }
+
+    private InputData parseData(String fileLine) {
+        String[] dimensions = fileLine.split(" ");
+        if (dimensions.length < 2) {
+            throw new InputMismatchException("Invalid dimensions format: " + fileLine);
+        }
+
+        int maxX = Integer.parseInt(dimensions[0]);
+        int maxY = Integer.parseInt(dimensions[1]);
+
+        List<MowerInputData> mowerInputs = IntStream.range(2, dimensions.length)
+                .filter(i -> i % 4 == 2) // Filter indices for mower inputs
+                .mapToObj(i -> runSingleLawnMower(dimensions, i))
+                .toList();
+
+        return new InputData(maxX, maxY, mowerInputs);
     }
 
     /**
      * Parse single lawn mower input from dimensions array.
      *
-     * @param dimensions The array containing mower input data
-     * @param startIdx   The starting index of the mower input data in the array
+     * @param dimensions   The array containing mower input data
+     * @param startIndex   The starting index of the mower input data in the array
      * @return MowerInputData object representing a single mower input
      */
-    private MowerInputData runSingleLawnMower(String[] dimensions, int startIdx) {
-        int x = Integer.parseInt(dimensions[startIdx]);
-        int y = Integer.parseInt(dimensions[startIdx + 1]);
-        char orientation = dimensions[startIdx + 2].charAt(0);
-        String instructions = dimensions[startIdx + 3];
-
-        return new MowerInputData(x, y, orientation, instructions);
+    private MowerInputData runSingleLawnMower(String[] dimensions, int startIndex) {
+        if (startIndex + 3 >= dimensions.length) {
+            throw new InputMismatchException("Incomplete mower input data.");
+        }
+        int initialX = Integer.parseInt(dimensions[startIndex]);
+        int initialY = Integer.parseInt(dimensions[startIndex + 1]);
+        char initialOrientation = dimensions[startIndex + 2].charAt(0);
+        String instructions = dimensions[startIndex + 3];
+        return new MowerInputData(initialX, initialY, initialOrientation, instructions);
     }
 }

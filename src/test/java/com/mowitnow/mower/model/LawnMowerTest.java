@@ -9,12 +9,11 @@ class LawnMowerTest {
     @Test
     void testMoveForwardNorth() {
         // Arrange
-        Lawn lawn = new Lawn(5, 5);
         LawnMower mower = new LawnMower(3, 3, OrientationEnum.NORTH);
         LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
 
         // Act
-        mower.executeProgram(lawn, instructions);
+        mower.executeProgram(new Lawn(4, 5), instructions);
 
         // Assert
         assertEquals("3 4 E", mower.getPosition());
@@ -23,29 +22,28 @@ class LawnMowerTest {
     @Test
     void testMoveForwardEast() {
         // Arrange
-        Lawn lawn = new Lawn(5, 5);
-        LawnMower mower = new LawnMower(3, 3, OrientationEnum.EAST);
-        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
+        LawnMower mower = new LawnMower(2, 1, OrientationEnum.EAST);
+        LawnMowerInstructions instructions = new LawnMowerInstructions("DA"); // Forward, Turn Right
 
         // Act
-        mower.executeProgram(lawn, instructions);
+        mower.executeProgram(new Lawn(5, 8), instructions);
 
         // Assert
-        assertEquals("4 3 S", mower.getPosition());
+        assertEquals("2 0 S", mower.getPosition());
     }
 
     @Test
     void testMoveForwardSouth() {
         // Arrange
-        Lawn lawn = new Lawn(5, 5);
-        LawnMower mower = new LawnMower(3, 3, OrientationEnum.SOUTH);
-        LawnMowerInstructions instructions = new LawnMowerInstructions("AD"); // Forward, Turn Right
+        Lawn lawn = new Lawn(8, 8);
+        LawnMower mower = new LawnMower(5, 7, OrientationEnum.SOUTH);
+        LawnMowerInstructions instructions = new LawnMowerInstructions("ADDA"); // Forward, Turn Right
 
         // Act
         mower.executeProgram(lawn, instructions);
 
         // Assert
-        assertEquals("3 2 W", mower.getPosition());
+        assertEquals("5 7 N", mower.getPosition());
     }
 
     @Test
