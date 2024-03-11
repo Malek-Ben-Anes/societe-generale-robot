@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class FileUtilsTest {
+class FileUtilsTest {
 
     @Test
     void testReadFileLines_Success() throws IOException {

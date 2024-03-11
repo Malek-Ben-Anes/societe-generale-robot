@@ -44,15 +44,20 @@ public class LawnMowerApplication {
             printMenu(); // Print menu options
             choice = scanner.nextInt(); // Read user choice
             scanner.nextLine(); // Consume the newline character after reading the integer
-            dataProvider = null;
 
             // Select data provider based on user choice
-            switch (choice) {
-                case 1 -> dataProvider = new FileDataProvider(); // Read data from input.txt file
-                case 2 -> dataProvider = new MockDataProvider(); // Use static data from java code
-                case 0 -> LOGGER.info("Exiting the program."); // Exit program
-                default -> LOGGER.warn("Invalid choice. Please try again."); // Invalid choice
-            }
+            dataProvider = switch (choice) {
+                case 1 -> new FileDataProvider(); // Read data from input.txt file
+                case 2 -> new MockDataProvider(); // Use static data from java code
+                case 0 -> {
+                    LOGGER.info("Exiting the program."); // Exit program
+                    yield null;
+                }
+                default -> {
+                    LOGGER.warn("Invalid choice. Please try again."); // Invalid choice
+                    yield null;
+                }
+            };
         } while (choice != 0 && choice != 1 && choice != 2); // Repeat until valid choice is made
 
         return dataProvider;

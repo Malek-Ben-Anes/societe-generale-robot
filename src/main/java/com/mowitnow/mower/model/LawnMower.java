@@ -1,8 +1,11 @@
 package com.mowitnow.mower.model;
 
+import com.mowitnow.mower.model.enums.InstructionEnum;
 import com.mowitnow.mower.model.enums.OrientationEnum;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static java.lang.Math.*;
 
@@ -10,6 +13,13 @@ import static java.lang.Math.*;
  * Represents a lawn mower with a position and orientation
  */
 public class LawnMower {
+
+    private final Map<OrientationEnum, Consumer<Lawn>> movesActions = Map.of(
+            OrientationEnum.NORTH, this::moveNorth,
+            OrientationEnum.EAST, this::moveEast,
+            OrientationEnum.SOUTH, this::moveSouth,
+            OrientationEnum.WEST, this::moveWest
+    );
 
     /**
      * X coordinate of the lawn mower
@@ -42,21 +52,30 @@ public class LawnMower {
 
         // Iterate through each instruction and execute the corresponding action
         for(var instruction: instructions.getList()) {
-            switch (instruction) {
-                case FORWARD -> moveForward(lawn);
-                case RIGHT -> orientationEnum = orientationEnum.turnRight();
-                case LEFT -> orientationEnum = orientationEnum.turnLeft();
+            if (instruction == InstructionEnum.FORWARD) {
+                movesActions.get(orientationEnum).accept(lawn);
+            } else if (instruction == InstructionEnum.RIGHT) {
+                orientationEnum = orientationEnum.turnRight();
+            } else if (instruction == InstructionEnum.LEFT) {
+                orientationEnum = orientationEnum.turnLeft();
             }
         }
     }
 
-    private void moveForward(Lawn lawn) {
-        switch (orientationEnum) {
-            case NORTH -> positionY = min(positionY + 1, lawn.height());
-            case EAST -> positionX = min(positionX + 1, lawn.width());
-            case SOUTH -> positionY = max(positionY - 1, 0);
-            case WEST -> positionX = max(positionX - 1, 0);
-        }
+    private void moveNorth(Lawn lawn) {
+        positionY = min(positionY + 1, lawn.height());
+    }
+
+    private void moveEast(Lawn lawn) {
+        positionX = min(positionX + 1, lawn.width());
+    }
+
+    private void moveSouth(Lawn lawn) {
+        positionY = max(positionY - 1, 0);
+    }
+
+    private void moveWest(Lawn lawn) {
+        positionX = max(positionX - 1, 0);
     }
 
     // Get the position of the lawn mower as a formatted string

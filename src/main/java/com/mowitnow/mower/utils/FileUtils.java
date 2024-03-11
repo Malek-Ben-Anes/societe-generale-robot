@@ -10,6 +10,9 @@ import java.util.List;
 
 public class FileUtils {
 
+    private FileUtils() {
+    }
+
     /**
      * Reads all lines from a file.
      *

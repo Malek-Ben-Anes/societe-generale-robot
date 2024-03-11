@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FileDataProvider implements DataProvider {
@@ -30,13 +30,11 @@ public class FileDataProvider implements DataProvider {
             // Read input file
             fileContent = FileUtils.readFileLines(INPUT_FILE_NAME);
         } catch (IOException e) {
-            String errorMessage = "Error reading file: " + INPUT_FILE_NAME;
-            LOGGER.error(errorMessage, e);
-            throw new RuntimeException(errorMessage, e);
+            throw new IllegalArgumentException("Error reading file: " + INPUT_FILE_NAME, e);
         }
 
-        if (fileContent == null || fileContent.isEmpty()) {
-            throw new RuntimeException("File content is empty: " + INPUT_FILE_NAME);
+        if (fileContent.isEmpty()) {
+            throw new InputMismatchException("File content is empty: " + INPUT_FILE_NAME);
         }
 
         String firstLine = fileContent.get(0);
@@ -46,7 +44,7 @@ public class FileDataProvider implements DataProvider {
     private InputData parseData(String fileLine) {
         String[] dimensions = fileLine.split(" ");
         if (dimensions.length < 2) {
-            throw new IllegalArgumentException("Invalid dimensions format: " + fileLine);
+            throw new InputMismatchException("Invalid dimensions format: " + fileLine);
         }
 
         int maxX = Integer.parseInt(dimensions[0]);
@@ -55,7 +53,7 @@ public class FileDataProvider implements DataProvider {
         List<MowerInputData> mowerInputs = IntStream.range(2, dimensions.length)
                 .filter(i -> i % 4 == 2) // Filter indices for mower inputs
                 .mapToObj(i -> runSingleLawnMower(dimensions, i))
-                .collect(Collectors.toList());
+                .toList();
 
         return new InputData(maxX, maxY, mowerInputs);
     }
@@ -69,7 +67,7 @@ public class FileDataProvider implements DataProvider {
      */
     private MowerInputData runSingleLawnMower(String[] dimensions, int startIndex) {
         if (startIndex + 3 >= dimensions.length) {
-            throw new IllegalArgumentException("Incomplete mower input data.");
+            throw new InputMismatchException("Incomplete mower input data.");
         }
         int initialX = Integer.parseInt(dimensions[startIndex]);
         int initialY = Integer.parseInt(dimensions[startIndex + 1]);
