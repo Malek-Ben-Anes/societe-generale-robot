@@ -4,6 +4,8 @@ import com.mowitnow.mower.model.enums.OrientationEnum;
 
 import java.util.Objects;
 
+import static java.lang.Math.*;
+
 /**
  * Represents a lawn mower with a position and orientation
  */
@@ -12,11 +14,11 @@ public class LawnMower {
     /**
      * X coordinate of the lawn mower
      */
-    private int x;
+    private int positionX;
     /**
      * Y coordinate of the lawn mower
      */
-    private int y;
+    private int positionY;
 
     /**
      * Orientation of the lawn mower
@@ -24,9 +26,9 @@ public class LawnMower {
     private OrientationEnum orientationEnum;
 
     // Constructor to initialize the lawn mower with coordinates and orientation
-    public LawnMower(int x, int y, OrientationEnum orientationEnum) {
-        this.x = x;
-        this.y = y;
+    public LawnMower(int positionX, int positionY, OrientationEnum orientationEnum) {
+        this.positionX = positionX;
+        this.positionY = positionY;
         this.orientationEnum = orientationEnum;
     }
 
@@ -34,31 +36,32 @@ public class LawnMower {
      * Move the lawn mower according to the instructions provided
      */
     public void executeProgram(Lawn lawn, LawnMowerInstructions instructions) {
-        if (instructions == null) {
+        if (instructions == null || instructions.getList().isEmpty()) {
             return;
         }
 
         // Iterate through each instruction and execute the corresponding action
-        instructions.getList().forEach(instruction -> {
+        for(var instruction: instructions.getList()) {
             switch (instruction) {
-                case FORWARD -> {
-                    // Move forward based on the current orientation, ensuring it stays within the lawn boundaries
-                    switch (orientationEnum) {
-                        case NORTH -> y = Math.min(y + 1, lawn.height());
-                        case EAST -> x = Math.min(x + 1, lawn.width());
-                        case SOUTH -> y = Math.max(y - 1, 0);
-                        case WEST -> x = Math.max(x - 1, 0);
-                    }
-                }
-                case RIGHT -> orientationEnum = orientationEnum.turnRight(); // Turn the lawn mower right
-                case LEFT -> orientationEnum = orientationEnum.turnLeft(); // Turn the lawn mower left
+                case FORWARD -> moveForward(lawn);
+                case RIGHT -> orientationEnum = orientationEnum.turnRight();
+                case LEFT -> orientationEnum = orientationEnum.turnLeft();
             }
-        });
+        }
+    }
+
+    private void moveForward(Lawn lawn) {
+        switch (orientationEnum) {
+            case NORTH -> positionY = min(positionY + 1, lawn.height());
+            case EAST -> positionX = min(positionX + 1, lawn.width());
+            case SOUTH -> positionY = max(positionY - 1, 0);
+            case WEST -> positionX = max(positionX - 1, 0);
+        }
     }
 
     // Get the position of the lawn mower as a formatted string
     public String getPosition() {
-        return String.format("%d %d %c", x, y, orientationEnum.getValue());
+        return String.format("%d %d %c", positionX, positionY, orientationEnum.getValue());
     }
 
     @Override
@@ -66,11 +69,11 @@ public class LawnMower {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LawnMower lawnMower = (LawnMower) o;
-        return x == lawnMower.x && y == lawnMower.y && orientationEnum == lawnMower.orientationEnum;
+        return positionX == lawnMower.positionX && positionY == lawnMower.positionY && orientationEnum == lawnMower.orientationEnum;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, orientationEnum);
+        return Objects.hash(positionX, positionY, orientationEnum);
     }
 }
